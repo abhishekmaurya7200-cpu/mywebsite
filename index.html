@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TEAM NOT OFFICIAL</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -14,8 +18,11 @@ margin:0;
 font-family:Arial;
 background:#020617;
 color:white;
+text-align:center;
 overflow:hidden;
 }
+
+/* canvas */
 
 canvas{
 position:fixed;
@@ -24,13 +31,18 @@ left:0;
 z-index:-1;
 }
 
+/* menu */
+
 .menu{
 position:fixed;
 top:20px;
 left:20px;
 font-size:28px;
 cursor:pointer;
+z-index:1000;
 }
+
+/* sidebar */
 
 .sidebar{
 position:fixed;
@@ -41,6 +53,7 @@ height:100%;
 background:#0f172a;
 padding-top:80px;
 transition:.4s;
+box-shadow:0 0 25px cyan;
 }
 
 .sidebar a{
@@ -58,23 +71,59 @@ background:#1e293b;
 left:0;
 }
 
+/* main */
+
 .main{
-padding:60px;
-text-align:center;
+padding:80px 20px;
 }
+
+/* neon title */
+
+.title{
+font-size:42px;
+text-shadow:
+0 0 10px cyan,
+0 0 20px cyan,
+0 0 40px cyan;
+}
+
+/* social */
+
+.social a{
+font-size:30px;
+margin:12px;
+color:white;
+transition:.3s;
+}
+
+.social a:hover{
+color:cyan;
+transform:scale(1.2);
+}
+
+/* cards */
 
 .card{
 background:rgba(255,255,255,0.05);
-padding:20px;
-margin:20px auto;
-border-radius:10px;
-max-width:450px;
+border-radius:15px;
+padding:25px;
+margin:25px auto;
+max-width:420px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 25px cyan;
+transition:.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
 }
 
 .price{
+font-size:24px;
 color:yellow;
-font-size:22px;
 }
+
+/* sections */
 
 section{
 display:none;
@@ -84,7 +133,36 @@ section.active{
 display:block;
 }
 
+/* payment */
+
+.payment img{
+width:260px;
+border-radius:10px;
+box-shadow:0 0 25px yellow;
+}
+
+input,select{
+padding:10px;
+width:80%;
+margin:10px;
+border:none;
+border-radius:6px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:6px;
+background:cyan;
+cursor:pointer;
+}
+
+button:hover{
+background:#22d3ee;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -93,10 +171,7 @@ display:block;
 
 <div class="sidebar" id="sidebar">
 
-<a onclick="show('home')">Home</a>
-<a onclick="show('packages')">Packages</a>
-<a onclick="show('tournament')">Tournament</a>
-<a onclick="show('order')">Order</a>
+<a onclick="show('order')">Order Promotion</a>
 <a onclick="show('payment')">Payment</a>
 
 </div>
@@ -105,19 +180,27 @@ display:block;
 
 <section id="home" class="active">
 
-<h1>TEAM NOT OFFICIAL</h1>
+<h1 class="title">TEAM NOT OFFICIAL</h1>
 
 <p>Gaming Promotion Community</p>
 
+<div class="social">
+
+<a href="https://www.youtube.com/@team_not_official_77">
+<i class="fa-brands fa-youtube"></i>
+</a>
+
+<a href="https://discord.gg/8cke8SRhu2">
+<i class="fa-brands fa-discord"></i>
+</a>
+
+<a href="https://www.instagram.com/team_not_official_77">
+<i class="fa-brands fa-instagram"></i>
+</a>
+
+</div>
+
 <p>Visitors: <span id="counter">0</span></p>
-
-<a href="https://www.youtube.com/@team_not_official_77">YouTube</a> |
-<a href="https://discord.gg/8cke8SRhu2">Discord</a> |
-<a href="https://www.instagram.com/team_not_official_77">Instagram</a>
-
-</section>
-
-<section id="packages">
 
 <h2>Promotion Packages</h2>
 
@@ -145,13 +228,18 @@ display:block;
 <div class="price">₹10000</div>
 </div>
 
-</section>
+<h2>Tournament</h2>
 
-<section id="tournament">
+<div class="card">
+<h3>Free Fire Squad Tournament</h3>
+<p>Entry Fee ₹50</p>
+<p>Prize Pool ₹1000</p>
 
-<h2>Tournament Bracket</h2>
+<button onclick="alert('Join Discord Server To Register')">
+Register
+</button>
 
-<p>Coming Soon: Tournament bracket system</p>
+</div>
 
 </section>
 
@@ -159,11 +247,13 @@ display:block;
 
 <h2>Order Promotion</h2>
 
+<div class="card">
+
 <form id="orderForm">
 
-<input type="text" id="name" placeholder="Your Name"><br><br>
+<input type="text" id="name" placeholder="Your Name">
 
-<input type="text" id="contact" placeholder="Discord / Instagram"><br><br>
+<input type="text" id="contact" placeholder="Discord / Instagram">
 
 <select id="package">
 
@@ -172,11 +262,15 @@ display:block;
 <option>10 Days ₹3500</option>
 <option>1 Month ₹10000</option>
 
-</select><br><br>
+</select>
+
+<br>
 
 <button type="submit">Submit Order</button>
 
 </form>
+
+</div>
 
 </section>
 
@@ -184,7 +278,11 @@ display:block;
 
 <h2>Payment</h2>
 
-<img src="https://i.ibb.co/chLJmvCx/PAYMENT.jpg" width="250">
+<div class="payment">
+
+<img src="https://i.ibb.co/chLJmvCx/PAYMENT.jpg">
+
+</div>
 
 </section>
 
@@ -198,8 +296,6 @@ function toggleMenu(){
 document.getElementById("sidebar").classList.toggle("active")
 }
 
-/* page switch */
-
 function show(id){
 
 document.querySelectorAll("section").forEach(s=>{
@@ -210,16 +306,16 @@ document.getElementById(id).classList.add("active")
 
 }
 
-/* visitor counter */
+/* counter */
 
 let c=0
 
 setInterval(()=>{
-c+=1
+c++
 document.getElementById("counter").innerText=c
 },1000)
 
-/* webhook order */
+/* webhook */
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 
@@ -238,7 +334,7 @@ headers:{
 },
 
 body:JSON.stringify({
-content:`New Order\nName: ${name}\nContact: ${contact}\nPackage: ${pack}`
+content:`NEW ORDER\nName: ${name}\nContact: ${contact}\nPackage: ${pack}`
 })
 
 })
@@ -247,11 +343,16 @@ alert("Order Sent!")
 
 })
 
-/* three.js background */
+/* three.js particles */
 
 let scene=new THREE.Scene()
 
-let camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
+let camera=new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+)
 
 let renderer=new THREE.WebGLRenderer()
 
@@ -273,7 +374,10 @@ THREE.MathUtils.randFloatSpread(2000)
 
 }
 
-geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3))
+geometry.setAttribute(
+'position',
+new THREE.Float32BufferAttribute(vertices,3)
+)
 
 let material=new THREE.PointsMaterial({color:0x00ffff})
 
