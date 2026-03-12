@@ -13,21 +13,31 @@ margin:0;
 font-family:Arial;
 color:white;
 text-align:center;
-background:linear-gradient(270deg,#000000,#0f172a,#020617,#1e293b);
-background-size:800% 800%;
-animation:bgmove 15s ease infinite;
+background:black;
+overflow-x:hidden;
 }
 
-/* animated background */
+/* RGB animated background */
 
-@keyframes bgmove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:linear-gradient(45deg,#ff0000,#00ffff,#ff00ff,#0000ff);
+animation:rgb 12s linear infinite;
+opacity:0.25;
+z-index:-1;
+}
+
+@keyframes rgb{
+0%{transform:translate(0,0)}
+50%{transform:translate(-25%,-25%)}
+100%{transform:translate(0,0)}
 }
 
 header{
-font-size:38px;
+font-size:40px;
 padding:25px;
 font-weight:bold;
 text-shadow:0 0 20px red,0 0 40px red;
@@ -36,10 +46,10 @@ text-shadow:0 0 20px red,0 0 40px red;
 /* logo */
 
 .logo{
-width:140px;
+width:150px;
 border-radius:50%;
 box-shadow:0 0 30px red,0 0 60px blue;
-margin-top:20px;
+margin-top:10px;
 }
 
 /* hero */
@@ -53,7 +63,7 @@ font-size:45px;
 text-shadow:0 0 20px cyan;
 }
 
-/* social buttons */
+/* buttons */
 
 .buttons{
 margin-top:40px;
@@ -79,20 +89,26 @@ box-shadow:0 0 20px white;
 .dc{background:#5865F2;}
 .ig{background:#E1306C;}
 
-/* promotion section */
+/* packages */
 
 .packages{
 padding:60px 20px;
 }
 
 .package{
-background:#111827;
+background:#0f172a;
 margin:20px auto;
 padding:25px;
-border-radius:10px;
+border-radius:12px;
 width:90%;
 max-width:600px;
-box-shadow:0 0 20px rgba(0,255,255,0.3);
+box-shadow:0 0 25px rgba(0,255,255,0.4);
+transition:0.3s;
+}
+
+.package:hover{
+transform:scale(1.03);
+box-shadow:0 0 35px cyan;
 }
 
 .package h3{
@@ -103,6 +119,18 @@ color:cyan;
 font-size:24px;
 color:yellow;
 margin-top:10px;
+}
+
+/* payment */
+
+.payment{
+padding:60px 20px;
+}
+
+.payment img{
+width:250px;
+border-radius:10px;
+box-shadow:0 0 25px yellow;
 }
 
 footer{
@@ -118,7 +146,7 @@ margin-top:40px;
 
 <header>TEAM NOT ?? OFFICIAL</header>
 
-<img class="logo" src="https://scontent-bom5-1.cdninstagram.com/v/t51.82787-19/530450648_17871624735408358_3457385925313246847_n.jpg">
+<img class="logo" src="https://i.ibb.co/KcL7YQQG/logo.jpg" alt="TEAM NOT LOGO">
 
 <div class="hero">
 
@@ -143,44 +171,60 @@ margin-top:40px;
 
 </div>
 
-<!-- PROMOTION PACKAGES -->
-
 <div class="packages">
 
-<h2>GROUP PROMOTION PACKAGE</h2>
+<h2>🔥 GROUP PROMOTION PACKAGE</h2>
 
 <div class="package">
-<h3>3 DAYS PROMOTION</h3>
-<p>Reel, Bio, Group, Story</p>
+<h3>3 DAYS CONTINUOUS PROMOTION</h3>
+<p>Reel + Bio + Group + Story</p>
 <p>20k – 30k Views Guaranteed</p>
-<p>200 – 400 Members</p>
+<p>200 – 400 Members Guaranteed</p>
 <div class="price">₹1350</div>
 </div>
 
 <div class="package">
-<h3>1 WEEK PROMOTION</h3>
-<p>Reel, Bio, Group, Story</p>
+<h3>1 WEEK CONTINUOUS PROMOTION</h3>
+<p>Reel + Bio + Group + Story</p>
 <p>40k – 50k Views Guaranteed</p>
-<p>400 – 700 Members</p>
+<p>400 – 700 Members Guaranteed</p>
 <div class="price">₹2000</div>
 </div>
 
 <div class="package">
-<h3>10 DAYS PROMOTION</h3>
+<h3>10 DAYS CONTINUOUS PROMOTION</h3>
+<p>Reel + Bio + Group + Story</p>
 <p>70k – 100k Views Guaranteed</p>
-<p>700 – 1000 Members</p>
+<p>700 – 1000 Members Guaranteed</p>
 <div class="price">₹3500</div>
 </div>
 
 <div class="package">
-<h3>1 MONTH PROMOTION</h3>
+<h3>1 MONTH CONTINUOUS PROMOTION</h3>
+<p>Reel Promo + Bio + Story + Group</p>
 <p>200k – 500k+ Views Guaranteed</p>
-<p>2k – 6k+ Members</p>
+<p>2k – 6k+ Members Guaranteed</p>
 <div class="price">₹10000</div>
 </div>
 
-<p>🔥 Post Collab With Us On Instagram Free For All</p>
-<p>✔ Full Guarantee Of Members</p>
+<div class="package">
+<h3>🎁 BONUS</h3>
+<p>Post Collab With Us On Instagram</p>
+<p>✔ FREE For All</p>
+<p>✔ FULL GUARANTEE OF MEMBERS</p>
+</div>
+
+</div>
+
+<div class="payment">
+
+<h2>💳 PAYMENT SCANNER</h2>
+
+<a href="https://imgbb.com/">
+<img src="https://i.ibb.co/chLJmvCx/PAYMENT.jpg" alt="PAYMENT">
+</a>
+
+<p>Scan the QR code to complete payment</p>
 
 </div>
 
