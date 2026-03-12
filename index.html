@@ -11,58 +11,49 @@
 body{
 margin:0;
 font-family:Arial;
-background:black;
 color:white;
 text-align:center;
+background:linear-gradient(270deg,#000000,#0f172a,#020617,#1e293b);
+background-size:800% 800%;
+animation:bgmove 15s ease infinite;
 }
 
-/* RGB animated background */
-
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:linear-gradient(45deg,red,blue,purple,cyan);
-animation:bgmove 12s linear infinite;
-opacity:0.2;
-z-index:-1;
-}
+/* animated background */
 
 @keyframes bgmove{
-0%{transform:translate(0,0)}
-50%{transform:translate(-25%,-25%)}
-100%{transform:translate(0,0)}
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
-
-/* Logo */
-
-.logo{
-width:150px;
-border-radius:50%;
-box-shadow:0 0 30px red,0 0 60px blue;
-margin-top:30px;
-}
-
-/* Title */
 
 header{
-font-size:40px;
-padding:20px;
+font-size:38px;
+padding:25px;
 font-weight:bold;
 text-shadow:0 0 20px red,0 0 40px red;
 }
+
+/* logo */
+
+.logo{
+width:140px;
+border-radius:50%;
+box-shadow:0 0 30px red,0 0 60px blue;
+margin-top:20px;
+}
+
+/* hero */
 
 .hero{
 padding:80px 20px;
 }
 
 .hero h1{
-font-size:40px;
+font-size:45px;
 text-shadow:0 0 20px cyan;
 }
 
-/* Buttons */
+/* social buttons */
 
 .buttons{
 margin-top:40px;
@@ -70,31 +61,52 @@ margin-top:40px;
 
 .btn{
 display:inline-block;
-margin:15px;
-padding:15px 35px;
+margin:10px;
+padding:15px 30px;
 border-radius:10px;
-font-size:20px;
 text-decoration:none;
 color:white;
+font-size:18px;
 transition:0.3s;
-box-shadow:0 0 15px rgba(255,255,255,0.3);
 }
 
 .btn:hover{
 transform:scale(1.1);
-box-shadow:0 0 25px white;
+box-shadow:0 0 20px white;
 }
 
 .yt{background:#ff0000;}
 .dc{background:#5865F2;}
 .ig{background:#E1306C;}
 
-.section{
+/* promotion section */
+
+.packages{
 padding:60px 20px;
 }
 
+.package{
+background:#111827;
+margin:20px auto;
+padding:25px;
+border-radius:10px;
+width:90%;
+max-width:600px;
+box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
+.package h3{
+color:cyan;
+}
+
+.price{
+font-size:24px;
+color:yellow;
+margin-top:10px;
+}
+
 footer{
-background:#111;
+background:#020617;
 padding:20px;
 margin-top:40px;
 }
@@ -106,15 +118,12 @@ margin-top:40px;
 
 <header>TEAM NOT ?? OFFICIAL</header>
 
-<!-- LOGO -->
-
-<img class="logo" src="https://scontent-bom5-1.cdninstagram.com/v/t51.82787-19/530450648_17871624735408358_3457385925313246847_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-bom5-1.cdninstagram.com&_nc_cat=110&_nc_oc=Q6cZ2QHFLN5hugyVrI8QVXe618mjy9DdXSQU3mm-ipzhRUVsj60MlOV3ogInl-22KFTz8mM&_nc_ohc=6L1ZU_JmbOsQ7kNvwGTixQg&_nc_gid=3WdBb9VyfFqeWPTny__ehg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_Afz0Wbh2wMFLMp9_sqzbRvcSggOvw8Bsr56E_cmsKQWu9A&oe=69B8488A&_nc_sid=7a9f4b">
+<img class="logo" src="https://scontent-bom5-1.cdninstagram.com/v/t51.82787-19/530450648_17871624735408358_3457385925313246847_n.jpg">
 
 <div class="hero">
 
-<h1>Welcome Gamers</h1>
-
-<p>Join TEAM NOT gaming community</p>
+<h1>Promotion Services</h1>
+<p>Grow your gaming community with TEAM NOT</p>
 
 <div class="buttons">
 
@@ -134,21 +143,49 @@ margin-top:40px;
 
 </div>
 
-<div class="section">
+<!-- PROMOTION PACKAGES -->
 
-<h2>About TEAM NOT</h2>
+<div class="packages">
 
-<p>
-TEAM NOT is a gaming community where players join tournaments
-and enjoy awesome gaming content.
-</p>
+<h2>GROUP PROMOTION PACKAGE</h2>
+
+<div class="package">
+<h3>3 DAYS PROMOTION</h3>
+<p>Reel, Bio, Group, Story</p>
+<p>20k – 30k Views Guaranteed</p>
+<p>200 – 400 Members</p>
+<div class="price">₹1350</div>
+</div>
+
+<div class="package">
+<h3>1 WEEK PROMOTION</h3>
+<p>Reel, Bio, Group, Story</p>
+<p>40k – 50k Views Guaranteed</p>
+<p>400 – 700 Members</p>
+<div class="price">₹2000</div>
+</div>
+
+<div class="package">
+<h3>10 DAYS PROMOTION</h3>
+<p>70k – 100k Views Guaranteed</p>
+<p>700 – 1000 Members</p>
+<div class="price">₹3500</div>
+</div>
+
+<div class="package">
+<h3>1 MONTH PROMOTION</h3>
+<p>200k – 500k+ Views Guaranteed</p>
+<p>2k – 6k+ Members</p>
+<div class="price">₹10000</div>
+</div>
+
+<p>🔥 Post Collab With Us On Instagram Free For All</p>
+<p>✔ Full Guarantee Of Members</p>
 
 </div>
 
 <footer>
-
-© 2026 BY/-NOT ABS ??
-
+© 2026 TEAM NOT ?? OFFICIAL
 </footer>
 
 </body>
