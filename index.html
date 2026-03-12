@@ -4,43 +4,65 @@
 <meta charset="UTF-8">
 <title>TEAM NOT ?? OFFICIAL</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(120deg,#0f172a,#020617);
+background:black;
 color:white;
 text-align:center;
 }
 
+/* RGB animated background */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:linear-gradient(45deg,red,blue,purple,cyan);
+animation:bgmove 12s linear infinite;
+opacity:0.2;
+z-index:-1;
+}
+
+@keyframes bgmove{
+0%{transform:translate(0,0)}
+50%{transform:translate(-25%,-25%)}
+100%{transform:translate(0,0)}
+}
+
+/* Logo */
+
+.logo{
+width:150px;
+border-radius:50%;
+box-shadow:0 0 30px red,0 0 60px blue;
+margin-top:30px;
+}
+
+/* Title */
+
 header{
-background:#020617;
-padding:25px;
-font-size:32px;
+font-size:40px;
+padding:20px;
 font-weight:bold;
-letter-spacing:2px;
-}
-
-nav{
-background:#111827;
-padding:12px;
-}
-
-nav a{
-color:white;
-margin:15px;
-text-decoration:none;
-font-size:18px;
+text-shadow:0 0 20px red,0 0 40px red;
 }
 
 .hero{
-padding:100px 20px;
+padding:80px 20px;
 }
 
 .hero h1{
 font-size:40px;
+text-shadow:0 0 20px cyan;
 }
+
+/* Buttons */
 
 .buttons{
 margin-top:40px;
@@ -48,29 +70,31 @@ margin-top:40px;
 
 .btn{
 display:inline-block;
-margin:10px;
-padding:15px 30px;
-border-radius:8px;
+margin:15px;
+padding:15px 35px;
+border-radius:10px;
+font-size:20px;
 text-decoration:none;
 color:white;
-font-size:18px;
 transition:0.3s;
+box-shadow:0 0 15px rgba(255,255,255,0.3);
+}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px white;
 }
 
 .yt{background:#ff0000;}
 .dc{background:#5865F2;}
 .ig{background:#E1306C;}
 
-.btn:hover{
-transform:scale(1.1);
-}
-
 .section{
-padding:70px 20px;
+padding:60px 20px;
 }
 
 footer{
-background:#020617;
+background:#111;
 padding:20px;
 margin-top:40px;
 }
@@ -80,57 +104,44 @@ margin-top:40px;
 
 <body>
 
-<header>
-TEAM NOT ?? OFFICIAL
-</header>
+<header>TEAM NOT ?? OFFICIAL</header>
 
-<nav>
-<a href="#">Home</a>
-<a href="#about">About</a>
-<a href="#social">Social</a>
-</nav>
+<!-- LOGO -->
+
+<img class="logo" src="https://scontent-bom5-1.cdninstagram.com/v/t51.82787-19/530450648_17871624735408358_3457385925313246847_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-bom5-1.cdninstagram.com&_nc_cat=110&_nc_oc=Q6cZ2QHFLN5hugyVrI8QVXe618mjy9DdXSQU3mm-ipzhRUVsj60MlOV3ogInl-22KFTz8mM&_nc_ohc=6L1ZU_JmbOsQ7kNvwGTixQg&_nc_gid=3WdBb9VyfFqeWPTny__ehg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_Afz0Wbh2wMFLMp9_sqzbRvcSggOvw8Bsr56E_cmsKQWu9A&oe=69B8488A&_nc_sid=7a9f4b">
 
 <div class="hero">
 
-<h1>Welcome To TEAM NOT ?? OFFICIAL</h1>
+<h1>Welcome Gamers</h1>
 
-<p>Gaming Community | Tournaments | Entertainment</p>
+<p>Join TEAM NOT gaming community</p>
 
 <div class="buttons">
 
 <a class="btn yt" href="https://www.youtube.com/@team_not_official_77" target="_blank">
-YouTube
+<i class="fa-brands fa-youtube"></i> YouTube
 </a>
 
 <a class="btn dc" href="https://discord.gg/8cke8SRhu2" target="_blank">
-Discord
+<i class="fa-brands fa-discord"></i> Discord
 </a>
 
 <a class="btn ig" href="https://www.instagram.com/team_not_official_77" target="_blank">
-Instagram
+<i class="fa-brands fa-instagram"></i> Instagram
 </a>
 
 </div>
 
 </div>
 
-<div class="section" id="about">
+<div class="section">
 
 <h2>About TEAM NOT</h2>
 
 <p>
-TEAM NOT is a gaming community where players join tournaments,
-connect with gamers and enjoy awesome gaming content.
-Follow our social platforms to stay updated.
+TEAM NOT is a gaming community where players join tournaments
+and enjoy awesome gaming content.
 </p>
-
-</div>
-
-<div class="section" id="social">
-
-<h2>Join Our Community</h2>
-
-<p>Subscribe our YouTube and join Discord server.</p>
 
 </div>
 
