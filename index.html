@@ -7,7 +7,6 @@
 <title>TEAM NOT OFFICIAL</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -20,16 +19,12 @@ text-align:center;
 overflow-x:hidden;
 }
 
-/* particles */
-
 canvas{
 position:fixed;
 top:0;
 left:0;
 z-index:-1;
 }
-
-/* login */
 
 .loginBox{
 background:#0f172a;
@@ -56,20 +51,6 @@ background:cyan;
 cursor:pointer;
 }
 
-button:hover{
-background:#22d3ee;
-}
-
-/* sidebar */
-
-.menu{
-position:fixed;
-top:20px;
-left:20px;
-font-size:28px;
-cursor:pointer;
-}
-
 .sidebar{
 position:fixed;
 left:-250px;
@@ -79,25 +60,11 @@ height:100%;
 background:#0f172a;
 padding-top:80px;
 transition:.4s;
-box-shadow:0 0 25px cyan;
-}
-
-.sidebar a{
-display:block;
-padding:15px;
-color:white;
-text-decoration:none;
-}
-
-.sidebar a:hover{
-background:#1e293b;
 }
 
 .sidebar.active{
 left:0;
 }
-
-/* cards */
 
 .card{
 background:rgba(255,255,255,0.05);
@@ -105,24 +72,12 @@ border-radius:15px;
 padding:25px;
 margin:25px auto;
 max-width:420px;
-backdrop-filter:blur(10px);
 box-shadow:0 0 25px cyan;
 }
 
 .price{
 color:yellow;
 font-size:22px;
-}
-
-.title{
-font-size:42px;
-text-shadow:0 0 10px cyan,0 0 20px cyan;
-}
-
-.social a{
-font-size:28px;
-margin:10px;
-color:white;
 }
 
 section{
@@ -134,6 +89,7 @@ display:block;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -170,117 +126,32 @@ display:block;
 
 <div id="site" style="display:none">
 
-<div class="menu" onclick="toggleMenu()">☰</div>
-
-<div class="sidebar" id="sidebar">
-
-<a onclick="show('order')">Order Promotion</a>
-<a onclick="show('payment')">Payment</a>
-
-</div>
-
-<div class="main">
-
-<section id="home" class="active">
-
-<h1 class="title">TEAM NOT OFFICIAL</h1>
-
-<div class="social">
-
-<a href="https://www.youtube.com/@team_not_official_77">
-<i class="fa-brands fa-youtube"></i>
-</a>
-
-<a href="https://discord.gg/8cke8SRhu2">
-<i class="fa-brands fa-discord"></i>
-</a>
-
-<a href="https://www.instagram.com/team_not_official_77">
-<i class="fa-brands fa-instagram"></i>
-</a>
-
-</div>
+<h1>TEAM NOT OFFICIAL</h1>
 
 <h2>Promotion Packages</h2>
 
 <div class="card">
 <h3>3 Days</h3>
-<p>20k-30k Views • 200-400 Members</p>
+<p>20k-30k Views</p>
 <div class="price">₹1350</div>
 </div>
 
 <div class="card">
 <h3>1 Week</h3>
-<p>40k-50k Views • 400-700 Members</p>
+<p>40k-50k Views</p>
 <div class="price">₹2000</div>
 </div>
 
 <div class="card">
 <h3>10 Days</h3>
-<p>70k-100k Views • 700-1000 Members</p>
+<p>70k-100k Views</p>
 <div class="price">₹3500</div>
 </div>
 
 <div class="card">
 <h3>1 Month</h3>
-<p>200k-500k Views • 2k-6k Members</p>
+<p>200k-500k Views</p>
 <div class="price">₹10000</div>
-</div>
-
-<h2>Tournament</h2>
-
-<div class="card">
-<h3>Free Fire Squad Tournament</h3>
-<p>Entry Fee ₹50</p>
-<p>Prize Pool ₹1000</p>
-<button onclick="window.open('https://discord.gg/8cke8SRhu2')">Register</button>
-</div>
-
-</section>
-
-<section id="order">
-
-<h2>Order Promotion</h2>
-
-<div class="card">
-
-<form id="orderForm">
-
-<input type="text" id="name" placeholder="Your Name">
-
-<input type="text" id="contact" placeholder="Discord / Instagram">
-
-<select id="package">
-
-<option>3 Days ₹1350</option>
-<option>1 Week ₹2000</option>
-<option>10 Days ₹3500</option>
-<option>1 Month ₹10000</option>
-
-</select>
-
-<br>
-
-<button type="submit">Submit Order</button>
-
-</form>
-
-</div>
-
-</section>
-
-<section id="payment">
-
-<h2>Payment</h2>
-
-<div class="card">
-
-<img src="https://i.ibb.co/chLJmvCx/PAYMENT.jpg" width="250">
-
-</div>
-
-</section>
-
 </div>
 
 </div>
@@ -290,25 +161,43 @@ display:block;
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInWithPhoneNumber, RecaptchaVerifier, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+getAuth,
+RecaptchaVerifier,
+signInWithPhoneNumber,
+GoogleAuthProvider,
+signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
 const firebaseConfig = {
-apiKey:"AIzaSyASVIgwqv43qsvofiRycpZsurVLOPF72zU",
-authDomain:"teamnotofficial-cfb99.firebaseapp.com",
-projectId:"teamnotofficial-cfb99",
-appId:"1:958555695445:web:9d5249dd97a13a772f27dc"
+apiKey: "AIzaSyASVIgWqv43qsvofiRycpZsurVLOPF72zU",
+authDomain: "teamnotofficial-cfb99.firebaseapp.com",
+projectId: "teamnotofficial-cfb99",
+appId: "1:958555695445:web:9d5249dd97a13a772f27dc"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
 
-window.recaptchaVerifier=new RecaptchaVerifier(auth,'recaptcha');
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+/* reCAPTCHA */
+
+window.recaptchaVerifier = new RecaptchaVerifier(auth,'recaptcha',{
+size:'normal'
+});
+
+
+/* OTP SEND */
 
 window.sendOTP=function(){
 
 let phone=document.getElementById("phone").value;
 
 signInWithPhoneNumber(auth,phone,window.recaptchaVerifier)
+
 .then(function(result){
 
 window.confirmationResult=result;
@@ -324,6 +213,9 @@ alert(error.message);
 });
 
 }
+
+
+/* OTP VERIFY */
 
 window.verifyOTP=function(){
 
@@ -346,6 +238,9 @@ alert("Wrong OTP");
 
 }
 
+
+/* GOOGLE LOGIN */
+
 window.googleLogin=function(){
 
 const provider=new GoogleAuthProvider();
@@ -357,73 +252,15 @@ signInWithPopup(auth,provider)
 document.getElementById("loginPage").style.display="none";
 document.getElementById("site").style.display="block";
 
+})
+
+.catch(function(error){
+
+alert(error.message);
+
 });
 
 }
-
-</script>
-
-<script>
-
-/* sidebar */
-
-function toggleMenu(){
-document.getElementById("sidebar").classList.toggle("active")
-}
-
-function show(id){
-
-document.querySelectorAll("section").forEach(s=>{
-s.style.display="none"
-})
-
-document.getElementById(id).style.display="block"
-
-}
-
-/* particles */
-
-let scene=new THREE.Scene()
-let camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
-
-let renderer=new THREE.WebGLRenderer({alpha:true})
-renderer.setSize(window.innerWidth,window.innerHeight)
-
-document.body.appendChild(renderer.domElement)
-
-let geometry=new THREE.BufferGeometry()
-let vertices=[]
-
-for(let i=0;i<3000;i++){
-
-vertices.push(
-THREE.MathUtils.randFloatSpread(2000),
-THREE.MathUtils.randFloatSpread(2000),
-THREE.MathUtils.randFloatSpread(2000)
-)
-
-}
-
-geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3))
-
-let material=new THREE.PointsMaterial({color:0x00ffff})
-let particles=new THREE.Points(geometry,material)
-
-scene.add(particles)
-
-camera.position.z=500
-
-function animate(){
-
-requestAnimationFrame(animate)
-
-particles.rotation.y+=0.0003
-
-renderer.render(scene,camera)
-
-}
-
-animate()
 
 </script>
 
