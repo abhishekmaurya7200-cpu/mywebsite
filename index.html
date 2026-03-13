@@ -4,9 +4,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TEAM NOT OFFICIAL</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -19,12 +22,54 @@ text-align:center;
 overflow-x:hidden;
 }
 
+/* particles */
+
 canvas{
 position:fixed;
 top:0;
 left:0;
 z-index:-1;
 }
+
+/* sidebar */
+
+.menu{
+position:fixed;
+top:20px;
+left:20px;
+font-size:28px;
+cursor:pointer;
+z-index:1000;
+}
+
+.sidebar{
+position:fixed;
+left:-260px;
+top:0;
+width:260px;
+height:100%;
+background:#0f172a;
+padding-top:80px;
+transition:.4s;
+box-shadow:0 0 25px cyan;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar a{
+display:block;
+padding:15px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#1e293b;
+}
+
+/* login */
 
 .loginBox{
 background:#0f172a;
@@ -34,6 +79,29 @@ max-width:350px;
 margin:120px auto;
 box-shadow:0 0 25px cyan;
 }
+
+/* cards */
+
+.card{
+background:#0f172a;
+border-radius:15px;
+padding:25px;
+margin:25px auto;
+max-width:420px;
+box-shadow:0 0 30px cyan;
+}
+
+.price{
+color:yellow;
+font-size:22px;
+}
+
+.title{
+font-size:40px;
+text-shadow:0 0 10px cyan,0 0 20px cyan;
+}
+
+/* inputs */
 
 input,select{
 padding:10px;
@@ -51,33 +119,8 @@ background:cyan;
 cursor:pointer;
 }
 
-.sidebar{
-position:fixed;
-left:-250px;
-top:0;
-width:250px;
-height:100%;
-background:#0f172a;
-padding-top:80px;
-transition:.4s;
-}
-
-.sidebar.active{
-left:0;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-border-radius:15px;
-padding:25px;
-margin:25px auto;
-max-width:420px;
-box-shadow:0 0 25px cyan;
-}
-
-.price{
-color:yellow;
-font-size:22px;
+button:hover{
+background:#22d3ee;
 }
 
 section{
@@ -89,7 +132,6 @@ display:block;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -102,20 +144,6 @@ display:block;
 
 <h2>Login</h2>
 
-<input type="text" id="phone" placeholder="+91 Phone Number">
-
-<div id="recaptcha"></div>
-
-<button onclick="sendOTP()">Send OTP</button>
-
-<br>
-
-<input type="text" id="otp" placeholder="Enter OTP">
-
-<button onclick="verifyOTP()">Verify OTP</button>
-
-<br><br>
-
 <button onclick="googleLogin()">Login with Google</button>
 
 </div>
@@ -126,7 +154,25 @@ display:block;
 
 <div id="site" style="display:none">
 
-<h1>TEAM NOT OFFICIAL</h1>
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+
+<a onclick="show('home')">Home</a>
+<a onclick="show('dashboard')">Dashboard</a>
+<a onclick="show('order')">Order</a>
+<a onclick="show('tournament')">Tournament</a>
+<a onclick="show('payment')">Payment</a>
+
+</div>
+
+<!-- HOME -->
+
+<section id="home" class="active">
+
+<h1 class="title">TEAM NOT OFFICIAL</h1>
+
+<p>Visitors: <span id="counter">0</span></p>
 
 <h2>Promotion Packages</h2>
 
@@ -154,92 +200,119 @@ display:block;
 <div class="price">₹10000</div>
 </div>
 
+</section>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+<h2>User Dashboard</h2>
+
+<div class="card">
+
+<p id="userName">Logged in</p>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+</section>
+
+<!-- ORDER -->
+
+<section id="order">
+
+<h2>Order Promotion</h2>
+
+<div class="card">
+
+<form id="orderForm">
+
+<input type="text" id="name" placeholder="Your Name">
+
+<input type="text" id="contact" placeholder="Discord / Instagram">
+
+<select id="package">
+
+<option>3 Days ₹1350</option>
+<option>1 Week ₹2000</option>
+<option>10 Days ₹3500</option>
+<option>1 Month ₹10000</option>
+
+</select>
+
+<br>
+
+<button type="submit">Submit Order</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- TOURNAMENT -->
+
+<section id="tournament">
+
+<h2>Tournament Registration</h2>
+
+<div class="card">
+
+<input id="teamName" placeholder="Team Name">
+
+<input id="leader" placeholder="Leader Name">
+
+<input id="teamContact" placeholder="Discord / WhatsApp">
+
+<button onclick="registerTournament()">Register</button>
+
+</div>
+
+</section>
+
+<!-- PAYMENT -->
+
+<section id="payment">
+
+<h2>Payment</h2>
+
+<div class="card">
+
+<img src="https://i.ibb.co/chLJmvCx/PAYMENT.jpg" width="250">
+
+</div>
+
+</section>
+
 </div>
 
 <!-- FIREBASE -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
 getAuth,
-RecaptchaVerifier,
-signInWithPhoneNumber,
 GoogleAuthProvider,
-signInWithPopup
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
+signInWithPopup,
+signOut
+} from
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyASVIgWqv43qsvofiRycpZsurVLOPF72zU",
-authDomain: "teamnotofficial-cfb99.firebaseapp.com",
-projectId: "teamnotofficial-cfb99",
-appId: "1:958555695445:web:9d5249dd97a13a772f27dc"
+
+apiKey:"AIzaSyASVIgWqv43qsvofiRycpZsurVLOPF72zU",
+authDomain:"teamnotofficial-cfb99.firebaseapp.com",
+projectId:"teamnotofficial-cfb99",
+appId:"1:958555695445:web:9d5249dd97a13a772f27dc"
+
 };
 
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-
-/* reCAPTCHA */
-
-window.recaptchaVerifier = new RecaptchaVerifier(auth,'recaptcha',{
-size:'normal'
-});
-
-
-/* OTP SEND */
-
-window.sendOTP=function(){
-
-let phone=document.getElementById("phone").value;
-
-signInWithPhoneNumber(auth,phone,window.recaptchaVerifier)
-
-.then(function(result){
-
-window.confirmationResult=result;
-
-alert("OTP Sent");
-
-})
-
-.catch(function(error){
-
-alert(error.message);
-
-});
-
-}
-
-
-/* OTP VERIFY */
-
-window.verifyOTP=function(){
-
-let otp=document.getElementById("otp").value;
-
-confirmationResult.confirm(otp)
-
-.then(function(){
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("site").style.display="block";
-
-})
-
-.catch(function(){
-
-alert("Wrong OTP");
-
-});
-
-}
-
-
-/* GOOGLE LOGIN */
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
 
 window.googleLogin=function(){
 
@@ -247,20 +320,165 @@ const provider=new GoogleAuthProvider();
 
 signInWithPopup(auth,provider)
 
-.then(function(){
+.then(function(result){
 
 document.getElementById("loginPage").style.display="none";
 document.getElementById("site").style.display="block";
 
-})
-
-.catch(function(error){
-
-alert(error.message);
+document.getElementById("userName").innerText =
+result.user.email;
 
 });
 
 }
+
+window.logout=function(){
+
+signOut(auth);
+
+document.getElementById("site").style.display="none";
+document.getElementById("loginPage").style.display="block";
+
+}
+
+</script>
+
+<script>
+
+/* sidebar */
+
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("active")
+}
+
+function show(id){
+
+document.querySelectorAll("section").forEach(s=>{
+s.style.display="none"
+})
+
+document.getElementById(id).style.display="block"
+
+}
+
+/* visitor counter */
+
+let c=0
+
+setInterval(()=>{
+c++
+document.getElementById("counter").innerText=c
+},1000)
+
+/* webhook order */
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+let name=document.getElementById("name").value
+let contact=document.getElementById("contact").value
+let pack=document.getElementById("package").value
+
+fetch("https://discord.com/api/webhooks/1481553772474929223/jwgNHcHBYzb_k6yZU75ij-1c-Sge_ZvKVPoB1I5PH2lM7l3Lm1ueoVf5Qw1r_kSERNOP",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+content:`NEW ORDER\nName:${name}\nContact:${contact}\nPackage:${pack}`
+})
+
+})
+
+alert("Order Sent!")
+
+})
+
+/* tournament webhook */
+
+function registerTournament(){
+
+let team=document.getElementById("teamName").value
+let leader=document.getElementById("leader").value
+let contact=document.getElementById("teamContact").value
+
+fetch("YOUR_WEBHOOK_URL",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+content:`TOURNAMENT REGISTER\nTeam:${team}\nLeader:${leader}\nContact:${contact}`
+})
+
+})
+
+alert("Registered!")
+
+}
+
+/* particles */
+
+let scene=new THREE.Scene()
+
+let camera=new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+)
+
+let renderer=new THREE.WebGLRenderer({alpha:true})
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+document.body.appendChild(renderer.domElement)
+
+let geometry=new THREE.BufferGeometry()
+
+let vertices=[]
+
+for(let i=0;i<3000;i++){
+
+vertices.push(
+THREE.MathUtils.randFloatSpread(2000),
+THREE.MathUtils.randFloatSpread(2000),
+THREE.MathUtils.randFloatSpread(2000)
+)
+
+}
+
+geometry.setAttribute(
+'position',
+new THREE.Float32BufferAttribute(vertices,3)
+)
+
+let material=new THREE.PointsMaterial({color:0x00ffff})
+
+let particles=new THREE.Points(geometry,material)
+
+scene.add(particles)
+
+camera.position.z=500
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+particles.rotation.y+=0.0003
+
+renderer.render(scene,camera)
+
+}
+
+animate()
 
 </script>
 
