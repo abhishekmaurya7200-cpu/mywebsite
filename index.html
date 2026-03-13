@@ -291,16 +291,18 @@ display:block;
 
 <script type="module">
 
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
 import {
 getAuth,
 GoogleAuthProvider,
 signInWithPopup,
-signOut
-} from
-"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+signOut,
+onAuthStateChanged,
+setPersistence,
+browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
 const firebaseConfig = {
 
@@ -311,8 +313,38 @@ appId:"1:958555695445:web:9d5249dd97a13a772f27dc"
 
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* 🔐 Enable persistent login */
+
+setPersistence(auth, browserLocalPersistence);
+
+
+/* 🔁 Auto Login Detect */
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("site").style.display="block";
+
+if(document.getElementById("userName")){
+document.getElementById("userName").innerText=user.email;
+}
+
+}else{
+
+document.getElementById("loginPage").style.display="block";
+document.getElementById("site").style.display="none";
+
+}
+
+});
+
+
+/* Google Login */
 
 window.googleLogin=function(){
 
@@ -325,19 +357,26 @@ signInWithPopup(auth,provider)
 document.getElementById("loginPage").style.display="none";
 document.getElementById("site").style.display="block";
 
-document.getElementById("userName").innerText =
-result.user.email;
+if(document.getElementById("userName")){
+document.getElementById("userName").innerText=result.user.email;
+}
+
+})
+
+.catch(function(error){
+
+alert(error.message);
 
 });
 
 }
 
+
+/* Logout */
+
 window.logout=function(){
 
 signOut(auth);
-
-document.getElementById("site").style.display="none";
-document.getElementById("loginPage").style.display="block";
 
 }
 
